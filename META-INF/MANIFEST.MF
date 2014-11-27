@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: xEdipse
-Bundle-SymbolicName: xEdipse;singleton:=true
+Bundle-Name: xedipse
+Bundle-SymbolicName: xedipse;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: xedipse.Xedipse
 Require-Bundle: org.eclipse.ui,
