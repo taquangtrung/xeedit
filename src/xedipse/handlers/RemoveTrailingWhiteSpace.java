@@ -24,7 +24,7 @@ public class RemoveTrailingWhiteSpace extends AbstractHandler {
 		
 		if (!(activeEditor instanceof ITextEditor))
 		{
-			Xedipse.logError("Move cursor: Cannot get caret position");
+			Xedipse.logError("Remove trailing white space: Cannot get text editor");
 			return null;
 		}
 			
@@ -34,7 +34,7 @@ public class RemoveTrailingWhiteSpace extends AbstractHandler {
 		
 		if (!(control instanceof StyledText)) 
 		{
-			Xedipse.logError("Move cursor: Cannot get caret position");
+			Xedipse.logError("Remove trailing white space: Cannot get styled text editor");
 			return null;
 		}
 

@@ -25,7 +25,7 @@ public class MoveCursorDownwardByBlock extends AbstractHandler {
 		
 		if (!(activeEditor instanceof ITextEditor))
 		{
-			Xedipse.logError("Move cursor: Cannot get caret position");
+			Xedipse.logError("Move cursor: cannot get text editor");
 			return null;
 		}
 			
@@ -35,7 +35,7 @@ public class MoveCursorDownwardByBlock extends AbstractHandler {
 		
 		if (!(control instanceof StyledText)) 
 		{
-			Xedipse.logError("Move cursor: Cannot get caret position");
+			Xedipse.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
 

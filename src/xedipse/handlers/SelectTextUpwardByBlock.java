@@ -26,7 +26,7 @@ public class SelectTextUpwardByBlock extends AbstractHandler {
 		
 		if (!(activeEditor instanceof ITextEditor))
 		{
-			Xedipse.logError("Move cursor: Cannot get caret position");
+			Xedipse.logError("Select text: Cannot get text editor");
 			return null;
 		}
 			
@@ -36,7 +36,7 @@ public class SelectTextUpwardByBlock extends AbstractHandler {
 		
 		if (!(control instanceof StyledText)) 
 		{
-			Xedipse.logError("Move cursor: Cannot get caret position");
+			Xedipse.logError("Select text: Cannot get styled text editor");
 			return null;
 		}
 
