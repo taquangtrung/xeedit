@@ -1,4 +1,4 @@
-xedipse
+xeedit
 =======
 
 eXtending Eclipse EDITors

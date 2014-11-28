@@ -5,57 +5,57 @@
    <extension
          point="org.eclipse.ui.commands">
       <category
-            name="Xedipse Command"
-            id="Xedipse.commands.category">
+            name="Xeedit Command"
+            id="Xeedit.commands.category">
       </category>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.moveCursorUpwardByIndent"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.moveCursorUpwardByIndent"
             name="Move Cursor Upward By Indent">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.moveCursorDownwardByIndent"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.moveCursorDownwardByIndent"
             name="Move Cursor Downward By Indent">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.moveCursorUpwardByBlock"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.moveCursorUpwardByBlock"
             name="Move Cursor Upward By Block">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.moveCursorDownwardByBlock"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.moveCursorDownwardByBlock"
             name="Move Cursor Downward By Block">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.selectTextUpwardByIndent"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.selectTextUpwardByIndent"
             name="Select Text Upward By Indent">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.selectTextDownwardByIndent"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.selectTextDownwardByIndent"
             name="Select Text Downward By Indent">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.selectTextUpwardByBlock"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.selectTextUpwardByBlock"
             name="Select Text Upward By Block">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.selectTextDownwardByBlock"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.selectTextDownwardByBlock"
             name="Select Text Downward By Block">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.removeTrailingWhiteSpace"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.removeTrailingWhiteSpace"
             name="Remove Trailing White Space">
       </command>
       <command
-            categoryId="Xedipse.commands.category"
-            id="Xedipse.commands.markTextOccurrence"
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.markTextOccurrence"
             name="Mark Text Occurrence">
       </command>
    </extension>
@@ -63,103 +63,103 @@
          point="org.eclipse.ui.handlers">
       <handler
             class="xeedit.handlers.MoveCursorUpwardByIndent"
-            commandId="Xedipse.commands.moveCursorUpwardByIndent">
+            commandId="Xeedit.commands.moveCursorUpwardByIndent">
       </handler>
       <handler
             class="xeedit.handlers.MoveCursorDownwardByIndent"
-            commandId="Xedipse.commands.moveCursorDownwardByIndent">
+            commandId="Xeedit.commands.moveCursorDownwardByIndent">
       </handler>
       <handler
             class="xeedit.handlers.MoveCursorUpwardByBlock"
-            commandId="Xedipse.commands.moveCursorUpwardByBlock">
+            commandId="Xeedit.commands.moveCursorUpwardByBlock">
       </handler>
       <handler
             class="xeedit.handlers.MoveCursorDownwardByBlock"
-            commandId="Xedipse.commands.moveCursorDownwardByBlock">
+            commandId="Xeedit.commands.moveCursorDownwardByBlock">
       </handler>
       <handler
             class="xeedit.handlers.SelectTextUpwardByIndent"
-            commandId="Xedipse.commands.selectTextUpwardByIndent">
+            commandId="Xeedit.commands.selectTextUpwardByIndent">
       </handler>
       <handler
             class="xeedit.handlers.SelectTextDownwardByIndent"
-            commandId="Xedipse.commands.selectTextDownwardByIndent">
+            commandId="Xeedit.commands.selectTextDownwardByIndent">
       </handler>
       <handler
             class="xeedit.handlers.SelectTextUpwardByBlock"
-            commandId="Xedipse.commands.selectTextUpwardByBlock">
+            commandId="Xeedit.commands.selectTextUpwardByBlock">
       </handler>
       <handler
             class="xeedit.handlers.SelectTextDownwardByBlock"
-            commandId="Xedipse.commands.selectTextDownwardByBlock">
+            commandId="Xeedit.commands.selectTextDownwardByBlock">
       </handler>
       <handler
             class="xeedit.handlers.RemoveTrailingWhiteSpace"
-            commandId="Xedipse.commands.removeTrailingWhiteSpace">
+            commandId="Xeedit.commands.removeTrailingWhiteSpace">
       </handler>
       <handler
             class="xeedit.handlers.MarkTextOccurrences"
-            commandId="Xedipse.commands.markTextOccurrence">
+            commandId="Xeedit.commands.markTextOccurrence">
       </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="Xedipse.commands.moveCursorUpwardByIndent"
+            commandId="Xeedit.commands.moveCursorUpwardByIndent"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+ARROW_UP">
       </key>
       <key
-            commandId="Xedipse.commands.moveCursorDownwardByIndent"
+            commandId="Xeedit.commands.moveCursorDownwardByIndent"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+ARROW_DOWN">
       </key>
       <key
-            commandId="Xedipse.commands.moveCursorUpwardByBlock"
+            commandId="Xeedit.commands.moveCursorUpwardByBlock"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+[">
       </key>
       <key
-            commandId="Xedipse.commands.moveCursorDownwardByBlock"
+            commandId="Xeedit.commands.moveCursorDownwardByBlock"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+]">
       </key>
       <key
-            commandId="Xedipse.commands.selectTextUpwardByIndent"
+            commandId="Xeedit.commands.selectTextUpwardByIndent"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+ARROW_UP">
       </key>
       <key
-            commandId="Xedipse.commands.selectTextDownwardByIndent"
+            commandId="Xeedit.commands.selectTextDownwardByIndent"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+ARROW_DOWN">
       </key>
       <key
-            commandId="Xedipse.commands.selectTextUpwardByBlock"
+            commandId="Xeedit.commands.selectTextUpwardByBlock"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+[">
       </key>
       <key
-            commandId="Xedipse.commands.selectTextDownwardByBlock"
+            commandId="Xeedit.commands.selectTextDownwardByBlock"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+]">
       </key>
       <key
-            commandId="Xedipse.commands.removeTrailingWhiteSpace"
+            commandId="Xeedit.commands.removeTrailingWhiteSpace"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+\">
       </key>
       <key
-            commandId="Xedipse.commands.markTextOccurrence"
+            commandId="Xeedit.commands.markTextOccurrence"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M3+N">
@@ -168,41 +168,41 @@
    <extension
          point="org.eclipse.ui.editors.annotationTypes">
       <type
-            markerType="xedipse.marker.occurrence"
-            name="xedipse.marker.occurrence">
+            markerType="xeedit.marker.occurrence"
+            name="xeedit.marker.occurrence">
       </type>
    </extension>
    <extension
          point="org.eclipse.ui.editors.markerAnnotationSpecification">
       <specification
-            annotationType="xedipse.marker.occurrence"
-            colorPreferenceKey="xedipse.marker.occurrence.color"
+            annotationType="xeedit.marker.occurrence"
+            colorPreferenceKey="xeedit.marker.occurrence.color"
             colorPreferenceValue="14,118,14"
             contributesToHeader="true"
-            highlightPreferenceKey="xedipse.marker.occurrence.highlight"
+            highlightPreferenceKey="xeedit.marker.occurrence.highlight"
             highlightPreferenceValue="true"
             includeOnPreferencePage="true"
             isGoToNextNavigationTarget="true"
             isGoToNextNavigationTargetKey="true"
             isGoToPreviousNavigationTarget="true"
             isGoToPreviousNavigationTargetKey="true"
-            label="xEdipse Text Occurrence"
-            overviewRulerPreferenceKey="xedipse.marker.occurrence.overview"
+            label="Xeedit Text Occurrence"
+            overviewRulerPreferenceKey="xeedit.marker.occurrence.overview"
             overviewRulerPreferenceValue="true"
             presentationLayer="0"
             showInNextPrevDropdownToolbarAction="true"
             showInNextPrevDropdownToolbarActionKey="true"
             symbolicIcon="info"
-            textPreferenceKey="xedipse.marker.occurrence.text"
+            textPreferenceKey="xeedit.marker.occurrence.text"
             textPreferenceValue="true"
             textStylePreferenceValue="BOX"
-            verticalRulerPreferenceKey="xedipse.marker.occurrence.ruler"
+            verticalRulerPreferenceKey="xeedit.marker.occurrence.ruler"
             verticalRulerPreferenceValue="true">
       </specification>
    </extension>
    <extension
-         id="xedipse.marker.occurrence"
-         name="xEdipse Text Occurrence Marker"
+         id="xeedit.marker.occurrence"
+         name="Xeedit Text Occurrence Marker"
          point="org.eclipse.core.resources.markers">
       <persistent
             value="true">
@@ -219,23 +219,23 @@
          <menu
                label="Sample Menu"
                mnemonic="M"
-               id="Xedipse.menus.sampleMenu">
+               id="Xeedit.menus.sampleMenu">
             <command
-                  commandId="Xedipse.commands.sampleCommand"
+                  commandId="Xeedit.commands.sampleCommand"
                   mnemonic="S"
-                  id="Xedipse.menus.sampleCommand">
+                  id="Xeedit.menus.sampleCommand">
             </command>
          </menu>
       </menuContribution>
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
          <toolbar
-               id="Xedipse.toolbars.sampleToolbar">
+               id="Xeedit.toolbars.sampleToolbar">
             <command
-                  commandId="Xedipse.commands.sampleCommand"
+                  commandId="Xeedit.commands.sampleCommand"
                   icon="icons/sample.gif"
                   tooltip="Say hello world"
-                  id="Xedipse.toolbars.sampleCommand">
+                  id="Xeedit.toolbars.sampleCommand">
             </command>
          </toolbar>
       </menuContribution>

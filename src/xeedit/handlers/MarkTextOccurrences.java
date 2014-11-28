@@ -26,7 +26,7 @@ import xeedit.Xeedit;
 
 public class MarkTextOccurrences extends AbstractHandler {
 	
-	private static final String XEDIPSE_MARK_OCCURRENCE_ID = "xedipse.marker.occurrence";
+	private static final String XEEDIT_MARK_OCCURRENCE_ID = "xeedit.marker.occurrence";
 
 
 	@Override
@@ -58,7 +58,7 @@ public class MarkTextOccurrences extends AbstractHandler {
 			// delete old marker
 			IFile ifile = ((FileEditorInput) input).getFile();
 			IMarker markes[];
-			markes = ifile.findMarkers(XEDIPSE_MARK_OCCURRENCE_ID, false, 0);
+			markes = ifile.findMarkers(XEEDIT_MARK_OCCURRENCE_ID, false, 0);
 			for (int i = 0; i < markes.length; i++)
 				markes[i].delete();
 			
@@ -70,7 +70,7 @@ public class MarkTextOccurrences extends AbstractHandler {
 				while (region != null) {
 					// mark the found text
 					IResource resource = (IResource) input.getAdapter(IResource.class);
-					IMarker marker = resource.createMarker(XEDIPSE_MARK_OCCURRENCE_ID);
+					IMarker marker = resource.createMarker(XEEDIT_MARK_OCCURRENCE_ID);
 					int startOffset = region.getOffset();
 					int endOffset = region.getOffset() + region.getLength();
 					marker.setAttribute(IMarker.CHAR_START, startOffset);
