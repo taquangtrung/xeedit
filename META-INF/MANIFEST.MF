@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: xedipse
-Bundle-SymbolicName: xedipse;singleton:=true
+Bundle-Name: xeedit
+Bundle-SymbolicName: Xeedit;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: xedipse.Xedipse
+Bundle-Activator: xeedit.Xeedit
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.e4.ui.workbench;bundle-version="1.0.2",

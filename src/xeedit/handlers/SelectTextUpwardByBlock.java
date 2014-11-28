@@ -1,4 +1,4 @@
-package xedipse.handlers;
+package xeedit.handlers;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -6,6 +6,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -13,10 +14,10 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import xedipse.Xedipse;
+import xeedit.Xeedit;
 
-public class MoveCursorUpwardByBlock extends AbstractHandler {
-
+public class SelectTextUpwardByBlock extends AbstractHandler {
+	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
@@ -25,7 +26,7 @@ public class MoveCursorUpwardByBlock extends AbstractHandler {
 		
 		if (!(activeEditor instanceof ITextEditor))
 		{
-			Xedipse.logError("Move cursor: Cannot get text editor");
+			Xeedit.logError("Select text: Cannot get text editor");
 			return null;
 		}
 			
@@ -35,18 +36,21 @@ public class MoveCursorUpwardByBlock extends AbstractHandler {
 		
 		if (!(control instanceof StyledText)) 
 		{
-			Xedipse.logError("Move cursor: Cannot get styled text editor");
+			Xeedit.logError("Select text: Cannot get styled text editor");
 			return null;
 		}
 
 		final StyledText styledText = (StyledText) control;
 		int cursorOffset = styledText.getCaretOffset();
+
+		Point selection = styledText.getSelection();
+		int startOffset = (selection.x < cursorOffset) ? selection.x : selection.y;
 		
 		try {
 			int lineNum= doc.getLineOfOffset(cursorOffset);
 			
 			if (lineNum <= 0) {
-				styledText.setSelection(0);
+				styledText.setSelection(startOffset, 0);
 				return null;
 			}
 			
@@ -59,7 +63,7 @@ public class MoveCursorUpwardByBlock extends AbstractHandler {
 			String prevLine= doc.get(beginOffset, endOffset - beginOffset + 1);
 			boolean isPrevLineEmpty = prevLine.trim().isEmpty();
 			if (isPrevLineEmpty && (cursorOffset != currentLineOffset)) {
-				styledText.setSelection(currentLineOffset);
+				styledText.setSelection(startOffset, currentLineOffset);
 				return null;
 			}
 
@@ -80,10 +84,13 @@ public class MoveCursorUpwardByBlock extends AbstractHandler {
 				}
 			}
 			int newOffset = doc.getLineOffset(lineNum);
-			styledText.setSelection(newOffset);
-			return null;
+			styledText.setSelection(startOffset, newOffset);
 		} catch (BadLocationException e) {
 			return null;
 		}
+		
+		return null;
 	}
+	
+
 }

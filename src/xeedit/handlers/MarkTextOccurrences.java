@@ -1,4 +1,4 @@
-package xedipse.handlers;
+package xeedit.handlers;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -22,7 +22,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import xedipse.Xedipse;
+import xeedit.Xeedit;
 
 public class MarkTextOccurrences extends AbstractHandler {
 	
@@ -37,7 +37,7 @@ public class MarkTextOccurrences extends AbstractHandler {
 		
 		if (!(activeEditor instanceof ITextEditor))
 		{
-			Xedipse.logError("Mark text occurrence: Cannot get text editor");
+			Xeedit.logError("Mark text occurrence: Cannot get text editor");
 			return null;
 		}
 			
@@ -47,7 +47,7 @@ public class MarkTextOccurrences extends AbstractHandler {
 		
 		if (!(control instanceof StyledText)) 
 		{
-			Xedipse.logError("Mark text occurrence: cannot get styled text editor");
+			Xeedit.logError("Mark text occurrence: cannot get styled text editor");
 			return null;
 		}
 

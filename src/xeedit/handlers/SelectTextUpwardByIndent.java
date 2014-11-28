@@ -1,4 +1,4 @@
-package xedipse.handlers;
+package xeedit.handlers;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -14,8 +14,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import xedipse.Xedipse;
-import xedipse.util.SouceUtil;
+import xeedit.Xeedit;
+import xeedit.util.SouceUtil;
 
 public class SelectTextUpwardByIndent extends AbstractHandler {
 
@@ -27,7 +27,7 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 		
 		if (!(activeEditor instanceof ITextEditor))
 		{
-			Xedipse.logError("Select text: Cannot get text editor");
+			Xeedit.logError("Select text: Cannot get text editor");
 			return null;
 		}
 			
@@ -37,7 +37,7 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 		
 		if (!(control instanceof StyledText)) 
 		{
-			Xedipse.logError("Select text: Cannot get styled text editor");
+			Xeedit.logError("Select text: Cannot get styled text editor");
 			return null;
 		}
 

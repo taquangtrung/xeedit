@@ -1,4 +1,4 @@
-package xedipse;
+package xeedit;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -9,18 +9,18 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Xedipse extends AbstractUIPlugin {
+public class Xeedit extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "EditorPP"; //$NON-NLS-1$
 
 	// The shared instance
-	private static Xedipse plugin;
+	private static Xeedit plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public Xedipse() {
+	public Xeedit() {
 	}
 
 	/*
@@ -46,7 +46,7 @@ public class Xedipse extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static Xedipse getDefault() {
+	public static Xeedit getDefault() {
 		return plugin;
 	}
 

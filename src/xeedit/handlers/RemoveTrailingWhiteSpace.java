@@ -1,4 +1,4 @@
-package xedipse.handlers;
+package xeedit.handlers;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -12,7 +12,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import xedipse.Xedipse;
+import xeedit.Xeedit;
 
 public class RemoveTrailingWhiteSpace extends AbstractHandler {
 
@@ -24,7 +24,7 @@ public class RemoveTrailingWhiteSpace extends AbstractHandler {
 		
 		if (!(activeEditor instanceof ITextEditor))
 		{
-			Xedipse.logError("Remove trailing white space: Cannot get text editor");
+			Xeedit.logError("Remove trailing white space: Cannot get text editor");
 			return null;
 		}
 			
@@ -34,7 +34,7 @@ public class RemoveTrailingWhiteSpace extends AbstractHandler {
 		
 		if (!(control instanceof StyledText)) 
 		{
-			Xedipse.logError("Remove trailing white space: Cannot get styled text editor");
+			Xeedit.logError("Remove trailing white space: Cannot get styled text editor");
 			return null;
 		}
 

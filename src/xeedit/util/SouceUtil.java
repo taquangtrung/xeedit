@@ -1,4 +1,4 @@
-package xedipse.util;
+package xeedit.util;
 
 public class SouceUtil {
 	

@@ -62,43 +62,43 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="xedipse.handlers.MoveCursorUpwardByIndent"
+            class="xeedit.handlers.MoveCursorUpwardByIndent"
             commandId="Xedipse.commands.moveCursorUpwardByIndent">
       </handler>
       <handler
-            class="xedipse.handlers.MoveCursorDownwardByIndent"
+            class="xeedit.handlers.MoveCursorDownwardByIndent"
             commandId="Xedipse.commands.moveCursorDownwardByIndent">
       </handler>
       <handler
-            class="xedipse.handlers.MoveCursorUpwardByBlock"
+            class="xeedit.handlers.MoveCursorUpwardByBlock"
             commandId="Xedipse.commands.moveCursorUpwardByBlock">
       </handler>
       <handler
-            class="xedipse.handlers.MoveCursorDownwardByBlock"
+            class="xeedit.handlers.MoveCursorDownwardByBlock"
             commandId="Xedipse.commands.moveCursorDownwardByBlock">
       </handler>
       <handler
-            class="xedipse.handlers.SelectTextUpwardByIndent"
+            class="xeedit.handlers.SelectTextUpwardByIndent"
             commandId="Xedipse.commands.selectTextUpwardByIndent">
       </handler>
       <handler
-            class="xedipse.handlers.SelectTextDownwardByIndent"
+            class="xeedit.handlers.SelectTextDownwardByIndent"
             commandId="Xedipse.commands.selectTextDownwardByIndent">
       </handler>
       <handler
-            class="xedipse.handlers.SelectTextUpwardByBlock"
+            class="xeedit.handlers.SelectTextUpwardByBlock"
             commandId="Xedipse.commands.selectTextUpwardByBlock">
       </handler>
       <handler
-            class="xedipse.handlers.SelectTextDownwardByBlock"
+            class="xeedit.handlers.SelectTextDownwardByBlock"
             commandId="Xedipse.commands.selectTextDownwardByBlock">
       </handler>
       <handler
-            class="xedipse.handlers.RemoveTrailingWhiteSpace"
+            class="xeedit.handlers.RemoveTrailingWhiteSpace"
             commandId="Xedipse.commands.removeTrailingWhiteSpace">
       </handler>
       <handler
-            class="xedipse.handlers.MarkTextOccurrences"
+            class="xeedit.handlers.MarkTextOccurrences"
             commandId="Xedipse.commands.markTextOccurrence">
       </handler>
    </extension>
