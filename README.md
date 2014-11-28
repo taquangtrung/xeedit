@@ -1,4 +1,4 @@
 xedipse
 =======
 
-Extended Editor for Eclipse
+eXtending Eclipse EDITors
