@@ -6,6 +6,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.swt.custom.CaretEvent;
+import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
@@ -31,8 +33,23 @@ public class SelectTextDownwardByBlock extends AbstractHandler {
 			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
-		StyledText styledText = (StyledText) control;
-
+		
+		final StyledText styledText = (StyledText) control;
+		styledText.addCaretListener(new CaretListener() {
+			@Override
+			public void caretMoved(CaretEvent event) {
+				styledText.redraw();
+				styledText.update();
+				styledText.removeCaretListener(this);
+			}
+		});
+		
+		selectText(styledText);
+		
+		return null;
+	}
+	
+	private void selectText(StyledText styledText) {
 		int cursorOffset = styledText.getCaretOffset();
 		String content = styledText.getText();
 		IDocument doc = new Document(content);
@@ -47,12 +64,12 @@ public class SelectTextDownwardByBlock extends AbstractHandler {
 			if (lineNum == (numOfLine - 2)) {
 				int lastLineOffset = doc.getLineOffset(lineNum+1);
 				styledText.setSelection(startOffset, lastLineOffset);
-				return null;
+				return;
 			}
 			
 			if (lineNum >= (numOfLine - 1)) {
 				styledText.setSelection(startOffset, doc.getLength());
-				return null;
+				return;
 			}
 			
 			int beginOffset = doc.getLineOffset(lineNum);
@@ -78,10 +95,7 @@ public class SelectTextDownwardByBlock extends AbstractHandler {
 			int newOffset = doc.getLineOffset(lineNum);
 			styledText.setSelection(startOffset, newOffset);
 		} catch (BadLocationException e) {
-			return null;
 		}
-		
-		return null;
 	}
 	
 

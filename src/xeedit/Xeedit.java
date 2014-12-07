@@ -1,8 +1,11 @@
 package xeedit;
 
+import java.util.Hashtable;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -13,7 +16,7 @@ public class Xeedit extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "EditorPP"; //$NON-NLS-1$
-
+	
 	// The shared instance
 	private static Xeedit plugin;
 	

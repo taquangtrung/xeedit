@@ -6,8 +6,12 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CaretEvent;
+import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -31,8 +35,22 @@ public class MoveCursorUpwardByIndent extends AbstractHandler {
 			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
-		StyledText styledText = (StyledText) control;
-
+		
+		final StyledText styledText = (StyledText) control;
+		styledText.addCaretListener(new CaretListener() {
+			@Override
+			public void caretMoved(CaretEvent event) {
+				styledText.redraw();
+				styledText.update();
+				styledText.removeCaretListener(this);
+			}
+		});
+		moveCursor(styledText);
+		
+		return null;
+	}
+	
+	private void moveCursor(StyledText styledText) {
 		int cursorOffset = styledText.getCaretOffset();
 		String content = styledText.getText();
 		IDocument doc = new Document(content);
@@ -44,7 +62,7 @@ public class MoveCursorUpwardByIndent extends AbstractHandler {
 			
 			if (lineNum <= 0) {
 				styledText.setSelection(0);
-				return null;
+				return;
 			}
 			
 			// ignore empty lines when going back;
@@ -63,7 +81,7 @@ public class MoveCursorUpwardByIndent extends AbstractHandler {
 			}
 			if (lineNum == 0) {
 				styledText.setSelection(0);
-				return null;
+				return;
 			}
 
 			
@@ -89,12 +107,12 @@ public class MoveCursorUpwardByIndent extends AbstractHandler {
 			if (prevLine.trim().isEmpty() && cursorColumn > currentIndent) {
 				newOffset = beginOffsetCurrentLine + currentIndent;
 				styledText.setSelection(newOffset);
-				return null;
+				return;
 			}
 			else if ((prevIndent != currentIndent) && (cursorColumn > currentIndent)) {
 				newOffset = beginOffsetCurrentLine + currentIndent;
 				styledText.setSelection(newOffset);
-				return null;
+				return;
 			}
 			
 			// ignore empty lines when going back;
@@ -113,7 +131,7 @@ public class MoveCursorUpwardByIndent extends AbstractHandler {
 			}
 			if (lineNum == 0) {
 				styledText.setSelection(0);
-				return null;
+				return;
 			}
 
 			
@@ -144,9 +162,7 @@ public class MoveCursorUpwardByIndent extends AbstractHandler {
 					newOffset++;
 			}
 			styledText.setSelection(newOffset);
-			return null;
 		} catch (BadLocationException e) {
-			return null;
 		}
 	}
 }

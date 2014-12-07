@@ -6,6 +6,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.swt.custom.CaretEvent;
+import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
@@ -31,8 +33,23 @@ public class SelectTextUpwardByBlock extends AbstractHandler {
 			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
-		StyledText styledText = (StyledText) control;
-
+		
+		final StyledText styledText = (StyledText) control;
+		styledText.addCaretListener(new CaretListener() {
+			@Override
+			public void caretMoved(CaretEvent event) {
+				styledText.redraw();
+				styledText.update();
+				styledText.removeCaretListener(this);
+			}
+		});
+		
+		selectText(styledText);
+		
+		return null;
+	}
+	
+	private void selectText(StyledText styledText) {
 		int cursorOffset = styledText.getCaretOffset();
 		String content = styledText.getText();
 		IDocument doc = new Document(content);
@@ -45,7 +62,7 @@ public class SelectTextUpwardByBlock extends AbstractHandler {
 			
 			if (lineNum <= 0) {
 				styledText.setSelection(startOffset, 0);
-				return null;
+				return;
 			}
 			
 			int currentLineOffset = doc.getLineOffset(lineNum);
@@ -58,7 +75,7 @@ public class SelectTextUpwardByBlock extends AbstractHandler {
 			boolean isPrevLineEmpty = prevLine.trim().isEmpty();
 			if (isPrevLineEmpty && (cursorOffset != currentLineOffset)) {
 				styledText.setSelection(startOffset, currentLineOffset);
-				return null;
+				return;
 			}
 
 			// find previous non-empty line which follows an empty line
@@ -80,10 +97,7 @@ public class SelectTextUpwardByBlock extends AbstractHandler {
 			int newOffset = doc.getLineOffset(lineNum);
 			styledText.setSelection(startOffset, newOffset);
 		} catch (BadLocationException e) {
-			return null;
 		}
-		
-		return null;
 	}
 	
 

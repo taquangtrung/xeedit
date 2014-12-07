@@ -6,8 +6,13 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CaretEvent;
+import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -26,19 +31,35 @@ public class MoveCursorDownwardByIndent extends AbstractHandler {
 		IWorkbenchPage page = window.getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
 		
+		ITextEditor textEditor = (ITextEditor)activeEditor;
+		
 		Control control = (Control)activeEditor.getAdapter(Control.class);
 		if (!(control instanceof StyledText)) 
 		{
 			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
-		StyledText styledText = (StyledText) control;
-
-		int cursorOffset = styledText.getCaretOffset();
-		String content = styledText.getText();
-		IDocument doc = new Document(content);
-
+		
+		final StyledText styledText = (StyledText) control;
+		styledText.addCaretListener(new CaretListener() {
+			@Override
+			public void caretMoved(CaretEvent event) {
+				styledText.redraw();
+				styledText.update();
+				styledText.removeCaretListener(this);
+			}
+		});
+		moveCursor(styledText);
+		
+		return null;
+	}
+	
+	private void moveCursor(StyledText styledText) {
 		try {
+			int cursorOffset = styledText.getCaretOffset();
+			String content = styledText.getText();
+			IDocument doc = new Document(content);
+
 			int lineNum= doc.getLineOfOffset(cursorOffset);
 			int numOfLine = doc.getNumberOfLines();
 			int docLen = doc.getLength();
@@ -46,12 +67,12 @@ public class MoveCursorDownwardByIndent extends AbstractHandler {
 			if (lineNum == (numOfLine - 2)) {
 				int lastLineOffset = doc.getLineOffset(lineNum+1);
 				styledText.setSelection(lastLineOffset);
-				return null;
+				return;
 			}
 			
 			if (lineNum >= (numOfLine - 1)) {
 				styledText.setSelection(doc.getLength());
-				return null;
+				return;
 			}
 			
 			// ignore empty lines while going down, go to the first non empty line
@@ -83,7 +104,7 @@ public class MoveCursorDownwardByIndent extends AbstractHandler {
 				if (newOffset >= docLen)
 					newOffset = beginOffset;
 				styledText.setSelection(newOffset);
-				return null;
+				return;
 			}
 
 			// find next line which has different identation
@@ -124,10 +145,7 @@ public class MoveCursorDownwardByIndent extends AbstractHandler {
 			styledText.setSelection(newOffset);
 		} catch (BadLocationException e) {
 			e.printStackTrace();
-			return null;
 		}
-		
-		return null;
 	}
 	
 
