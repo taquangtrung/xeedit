@@ -4,6 +4,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Point;
@@ -25,24 +26,17 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 		IWorkbenchPage page = window.getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
 		
-		if (!(activeEditor instanceof ITextEditor))
-		{
-			Xeedit.logError("Select text: Cannot get text editor");
-			return null;
-		}
-			
-	    ITextEditor textEditor = (ITextEditor)activeEditor;
-	    IDocument doc = textEditor.getDocumentProvider().getDocument(textEditor.getEditorInput());
 		Control control = (Control)activeEditor.getAdapter(Control.class);
-		
 		if (!(control instanceof StyledText)) 
 		{
-			Xeedit.logError("Select text: Cannot get styled text editor");
+			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
+		StyledText styledText = (StyledText) control;
 
-		final StyledText styledText = (StyledText) control;
 		int cursorOffset = styledText.getCaretOffset();
+		String content = styledText.getText();
+		IDocument doc = new Document(content);
 
 		Point selection = styledText.getSelection();
 		int startOffset = (selection.x < cursorOffset) ? selection.x : selection.y;

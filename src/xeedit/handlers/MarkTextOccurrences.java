@@ -79,7 +79,7 @@ public class MarkTextOccurrences extends AbstractHandler {
 					region = docFind.find(endOffset + 1, text, true, true, false, false);
 				}
 			}
-		} catch (CoreException | BadLocationException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
