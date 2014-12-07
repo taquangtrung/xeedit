@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: xeedit
-Bundle-SymbolicName: Xeedit;singleton:=true
+Bundle-SymbolicName: xeedit;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: xeedit.Xeedit
 Require-Bundle: org.eclipse.ui,
