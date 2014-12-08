@@ -15,10 +15,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.ui.texteditor.ITextEditor;
 
 import xeedit.Xeedit;
-import xeedit.util.SouceUtil;
+import xeedit.util.SourceUtil;
 
 public class SelectTextUpwardByIndent extends AbstractHandler {
 
@@ -27,9 +26,9 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
-		
+
 		Control control = (Control)activeEditor.getAdapter(Control.class);
-		if (!(control instanceof StyledText)) 
+		if (!(control instanceof StyledText))
 		{
 			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
@@ -44,30 +43,31 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 				styledText.removeCaretListener(this);
 			}
 		});
-		
+
 		selectText(styledText);
-		
+
 		return null;
 	}
-	
+
 	private void selectText(StyledText styledText) {
 		int cursorOffset = styledText.getCaretOffset();
 		String content = styledText.getText();
 		IDocument doc = new Document(content);
+		int tabSize = styledText.getTabs();
 
 		Point selection = styledText.getSelection();
 		int startOffset = (selection.x < cursorOffset) ? selection.x : selection.y;
-		
+
 		try {
 			int lineNum = doc.getLineOfOffset(cursorOffset);
-			int numOfLine = doc.getNumberOfLines(); 
+			int numOfLine = doc.getNumberOfLines();
 			int docLen = doc.getLength();
-			
+
 			if (lineNum <= 0) {
 				styledText.setSelection(startOffset, 0);
 				return;
 			}
-			
+
 			// ignore empty lines when going back;
 			int beginOffsetCurrentLine = 0;
 			int endOffsetCurrentLine = 0;
@@ -87,7 +87,7 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 				return;
 			}
 
-			
+
 			// if previous line has different indentation and cursor is not
 			// in the beginning of current block, then go to the beginning.
 			beginOffsetCurrentLine = doc.getLineOffset(lineNum);
@@ -101,12 +101,12 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 					newOffset++;
 			}
 			int currentIndent = newOffset - beginOffsetCurrentLine;
-			
+
 
 			int beginOffsetPrevLine = doc.getLineOffset(lineNum-1);
 			int endOffsetPrevLine = doc.getLineOffset(lineNum) - 1;
 			String prevLine = doc.get(beginOffsetPrevLine, endOffsetPrevLine - beginOffsetPrevLine + 1);
-			int prevIndent = SouceUtil.indentationOfLine(prevLine);
+			int prevIndent = SourceUtil.indentationOfLine(prevLine, tabSize);
 			if (prevLine.trim().isEmpty() && cursorColumn > currentIndent) {
 				newOffset = beginOffsetCurrentLine;// + currentIndent;
 				styledText.setSelection(startOffset, newOffset);
@@ -117,7 +117,7 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 				styledText.setSelection(startOffset, newOffset);
 				return;
 			}
-			
+
 			// ignore empty lines when going back;
 			lineNum--;
 			endOffsetCurrentLine = 0;
@@ -137,15 +137,15 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 				return;
 			}
 
-			
-			// search back to find the last line has different indentation  
-			currentIndent = SouceUtil.indentationOfLine(currentLine);
+
+			// search back to find the last line has different indentation
+			currentIndent = SourceUtil.indentationOfLine(currentLine, tabSize);
 			while (lineNum > 0) {
 				beginOffsetPrevLine = doc.getLineOffset(lineNum-1);
 				endOffsetPrevLine = doc.getLineOffset(lineNum) - 1;
 				prevLine = doc.get(beginOffsetPrevLine, endOffsetPrevLine - beginOffsetPrevLine + 1);
-				prevIndent = SouceUtil.indentationOfLine(prevLine);
-				
+				prevIndent = SourceUtil.indentationOfLine(prevLine, tabSize);
+
 				if (prevLine.trim().isEmpty()) {
 					break;
 				}
@@ -162,6 +162,6 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 			e.printStackTrace();
 		}
 	}
-	
+
 
 }

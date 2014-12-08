@@ -15,26 +15,25 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.ui.texteditor.ITextEditor;
 
 import xeedit.Xeedit;
-import xeedit.util.SouceUtil;
+import xeedit.util.SourceUtil;
 
 public class SelectTextDownwardByIndent extends AbstractHandler {
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
-		
+
 		Control control = (Control)activeEditor.getAdapter(Control.class);
-		if (!(control instanceof StyledText)) 
+		if (!(control instanceof StyledText))
 		{
 			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
-		
+
 		final StyledText styledText = (StyledText) control;
 		styledText.addCaretListener(new CaretListener() {
 			@Override
@@ -44,41 +43,42 @@ public class SelectTextDownwardByIndent extends AbstractHandler {
 				styledText.removeCaretListener(this);
 			}
 		});
-		
+
 		selectText(styledText);
-		
+
 		return null;
 	}
-	
+
 	private void selectText(StyledText styledText) {
 		int cursorOffset = styledText.getCaretOffset();
 		String content = styledText.getText();
 		IDocument doc = new Document(content);
+		int tabSize = styledText.getTabs();
 
 		Point selection = styledText.getSelection();
 		int startOffset = (selection.x < cursorOffset) ? selection.x : selection.y;
-		
+
 		try {
 			int lineNum= doc.getLineOfOffset(cursorOffset);
 			int numOfLine = doc.getNumberOfLines();
 			int docLen = doc.getLength();
-			
+
 			if (lineNum == (numOfLine - 2)) {
 				int lastLineOffset = doc.getLineOffset(lineNum+1);
 				styledText.setSelection(startOffset, lastLineOffset);
 				return;
 			}
-			
+
 			if (lineNum >= (numOfLine - 1)) {
 				styledText.setSelection(startOffset, doc.getLength());
 				return;
 			}
-			
+
 			// ignore empty lines while going down, go to the first non empty line
 			int beginOffset = doc.getLineOffset(lineNum);
 			int endOffset = doc.getLineOffset(lineNum+1) - 1;
 			String currentLine = doc.get(beginOffset, endOffset - beginOffset + 1);
-			
+
 			if (currentLine.trim().isEmpty()) {
 				lineNum++;
 				while (lineNum < numOfLine) {
@@ -87,7 +87,7 @@ public class SelectTextDownwardByIndent extends AbstractHandler {
 					currentLine = doc.get(beginOffset, endOffset - beginOffset + 1);
 					if (currentLine.trim().isEmpty())
 						lineNum++;
-					else 
+					else
 						break;
 				}
 				if (lineNum >= numOfLine)
@@ -104,19 +104,19 @@ public class SelectTextDownwardByIndent extends AbstractHandler {
 						k++;
 					}
 				}
-				
+
 				styledText.setSelection(startOffset, newOffset);
 				return;
 			}
 
 			// find next line which has different identation
-			int currentIndent = SouceUtil.indentationOfLine(currentLine);
+			int currentIndent = SourceUtil.indentationOfLine(currentLine, tabSize);
 			lineNum++;
 			while (lineNum < numOfLine - 1) {
 				beginOffset = doc.getLineOffset(lineNum);
 				endOffset = (lineNum < numOfLine - 1) ? doc.getLineOffset(lineNum+1) - 1 : docLen - 1;
 				String nextLine = doc.get(beginOffset, endOffset - beginOffset + 1);
-				int nextIndent = SouceUtil.indentationOfLine(nextLine);
+				int nextIndent = SourceUtil.indentationOfLine(nextLine, tabSize);
 				if (currentIndent != nextIndent) {
 					break;
 				}
@@ -130,7 +130,7 @@ public class SelectTextDownwardByIndent extends AbstractHandler {
 					currentIndent = nextIndent;
 				}
 			}
-			
+
 			// find location to jump to
 			int newOffset = doc.getLineOffset(lineNum);
 			int k = newOffset;
@@ -144,11 +144,11 @@ public class SelectTextDownwardByIndent extends AbstractHandler {
 					k++;
 				}
 			}
-			
+
 			styledText.setSelection(startOffset, newOffset);
 		} catch (BadLocationException e) {
 		}
 	}
-	
+
 
 }

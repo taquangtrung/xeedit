@@ -6,22 +6,17 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.ui.texteditor.ITextEditor;
 
 import xeedit.Xeedit;
-import xeedit.util.SouceUtil;
+import xeedit.util.SourceUtil;
 
 public class MoveCursorDownwardByIndent extends AbstractHandler {
 	
@@ -30,8 +25,6 @@ public class MoveCursorDownwardByIndent extends AbstractHandler {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
-		
-		ITextEditor textEditor = (ITextEditor)activeEditor;
 		
 		Control control = (Control)activeEditor.getAdapter(Control.class);
 		if (!(control instanceof StyledText)) 
@@ -108,13 +101,14 @@ public class MoveCursorDownwardByIndent extends AbstractHandler {
 			}
 
 			// find next line which has different identation
-			int currentIndent = SouceUtil.indentationOfLine(currentLine);
+			int tabSize = styledText.getTabs();
+			int currentIndent = SourceUtil.indentationOfLine(currentLine,tabSize);
 			lineNum++;
 			while (lineNum < numOfLine - 1) {
 				beginOffset = doc.getLineOffset(lineNum);
 				endOffset = (lineNum < numOfLine - 1) ? doc.getLineOffset(lineNum+1) - 1 : docLen - 1;
 				String nextLine = doc.get(beginOffset, endOffset - beginOffset + 1);
-				int nextIndent = SouceUtil.indentationOfLine(nextLine);
+				int nextIndent = SourceUtil.indentationOfLine(nextLine, tabSize);
 				if (currentIndent != nextIndent) {
 					break;
 				}

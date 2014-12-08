@@ -15,25 +15,24 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.ui.texteditor.ITextEditor;
 
 import xeedit.Xeedit;
 
 public class SelectTextDownwardByBlock extends AbstractHandler {
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
 		IEditorPart activeEditor = page.getActiveEditor();
-		
+
 		Control control = (Control)activeEditor.getAdapter(Control.class);
-		if (!(control instanceof StyledText)) 
+		if (!(control instanceof StyledText))
 		{
 			Xeedit.logError("Move cursor: cannot get styled text editor");
 			return null;
 		}
-		
+
 		final StyledText styledText = (StyledText) control;
 		styledText.addCaretListener(new CaretListener() {
 			@Override
@@ -43,12 +42,12 @@ public class SelectTextDownwardByBlock extends AbstractHandler {
 				styledText.removeCaretListener(this);
 			}
 		});
-		
+
 		selectText(styledText);
-		
+
 		return null;
 	}
-	
+
 	private void selectText(StyledText styledText) {
 		int cursorOffset = styledText.getCaretOffset();
 		String content = styledText.getText();
@@ -56,22 +55,22 @@ public class SelectTextDownwardByBlock extends AbstractHandler {
 
 		Point selection = styledText.getSelection();
 		int startOffset = (selection.x < cursorOffset) ? selection.x : selection.y;
-		
+
 		try {
 			int lineNum= doc.getLineOfOffset(cursorOffset);
 			int numOfLine = doc.getNumberOfLines();
-			
+
 			if (lineNum == (numOfLine - 2)) {
 				int lastLineOffset = doc.getLineOffset(lineNum+1);
 				styledText.setSelection(startOffset, lastLineOffset);
 				return;
 			}
-			
+
 			if (lineNum >= (numOfLine - 1)) {
 				styledText.setSelection(startOffset, doc.getLength());
 				return;
 			}
-			
+
 			int beginOffset = doc.getLineOffset(lineNum);
 			int endOffset = doc.getLineOffset(lineNum+1) - 1;
 			String currentLine = doc.get(beginOffset, endOffset - beginOffset + 1);
@@ -97,6 +96,6 @@ public class SelectTextDownwardByBlock extends AbstractHandler {
 		} catch (BadLocationException e) {
 		}
 	}
-	
+
 
 }

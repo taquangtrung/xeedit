@@ -1,11 +1,8 @@
 package xeedit;
 
-import java.util.Hashtable;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -16,10 +13,10 @@ public class Xeedit extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "EditorPP"; //$NON-NLS-1$
-	
+
 	// The shared instance
 	private static Xeedit plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -63,7 +60,7 @@ public class Xeedit extends AbstractUIPlugin {
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
-	
+
 	private static String getPosition() {
 		try {
 			// get the stack element corresponding to the caller of the log method
@@ -94,10 +91,10 @@ public class Xeedit extends AbstractUIPlugin {
 				msg + getPosition(), null);
 		plugin.getLog().log(status);
 	}
-	
+
 	/**
 	 * Log an error message in Eclipse log.
-	 * 
+	 *
 	 * @param exception
 	 *            The exception that triggered this error message.
 	 */
@@ -105,7 +102,7 @@ public class Xeedit extends AbstractUIPlugin {
 		Status status = new Status(IStatus.ERROR, "EditorPP", 0, msg, exception);
 		plugin.getLog().log(status);
 	}
-	
+
 	/**
 	 * @param exception
 	 *            The exception to log.
@@ -114,7 +111,7 @@ public class Xeedit extends AbstractUIPlugin {
 		Status status = new Status(IStatus.ERROR, "ocaml", 0, e.getMessage(), e);
 		plugin.getLog().log(status);
 	}
-	
+
 
 
 }
