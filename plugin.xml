@@ -58,6 +58,11 @@
             id="Xeedit.commands.markTextOccurrence"
             name="Mark Text Occurrence">
       </command>
+      <command
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.toggleWordWrap"
+            name="Toggle Word Wrap">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -100,6 +105,10 @@
       <handler
             class="xeedit.handlers.MarkTextOccurrences"
             commandId="Xeedit.commands.markTextOccurrence">
+      </handler>
+      <handler
+            class="xeedit.handlers.ToggleWordWrap"
+            commandId="Xeedit.commands.toggleWordWrap">
       </handler>
    </extension>
    <extension
@@ -163,6 +172,12 @@
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M3+N">
+      </key>
+      <key
+            commandId="Xeedit.commands.toggleWordWrap"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+W">
       </key>
    </extension>
    <extension
