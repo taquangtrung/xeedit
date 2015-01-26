@@ -63,6 +63,11 @@
             id="Xeedit.commands.toggleWordWrap"
             name="Toggle Word Wrap">
       </command>
+      <command
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.showTaskTags"
+            name="Show Task Tags">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -109,6 +114,10 @@
       <handler
             class="xeedit.handlers.ToggleWordWrap"
             commandId="Xeedit.commands.toggleWordWrap">
+      </handler>
+      <handler
+            class="xeedit.handlers.ToggleShowTaskTags"
+            commandId="Xeedit.commands.showTaskTags">
       </handler>
    </extension>
    <extension
@@ -178,6 +187,12 @@
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M3+W">
+      </key>
+      <key
+            commandId="Xeedit.commands.showTaskTags"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+T">
       </key>
    </extension>
    <extension

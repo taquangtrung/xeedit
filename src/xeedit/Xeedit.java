@@ -16,7 +16,7 @@ public class Xeedit extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Xeedit plugin;
-
+	
 	/**
 	 * The constructor
 	 */
@@ -30,6 +30,8 @@ public class Xeedit extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		
+		showTaskTags = false;	// default do not show task tag
 	}
 
 	/*
@@ -111,6 +113,8 @@ public class Xeedit extends AbstractUIPlugin {
 		Status status = new Status(IStatus.ERROR, "ocaml", 0, e.getMessage(), e);
 		plugin.getLog().log(status);
 	}
+	
+	public static boolean showTaskTags;
 
 
 
