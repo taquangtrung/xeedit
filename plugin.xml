@@ -65,8 +65,8 @@
       </command>
       <command
             categoryId="Xeedit.commands.category"
-            id="Xeedit.commands.showTaskTags"
-            name="Show Task Tags">
+            id="Xeedit.commands.toggleShowTaskTags"
+            name="Toggle Show Task Tags">
       </command>
    </extension>
    <extension
@@ -117,7 +117,7 @@
       </handler>
       <handler
             class="xeedit.handlers.ToggleShowTaskTags"
-            commandId="Xeedit.commands.showTaskTags">
+            commandId="Xeedit.commands.toggleShowTaskTags">
       </handler>
    </extension>
    <extension
@@ -189,7 +189,7 @@
             sequence="M1+M3+W">
       </key>
       <key
-            commandId="Xeedit.commands.showTaskTags"
+            commandId="Xeedit.commands.toggleShowTaskTags"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+T">
