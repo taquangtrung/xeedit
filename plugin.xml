@@ -68,6 +68,11 @@
             id="Xeedit.commands.toggleShowTaskTags"
             name="Toggle Show Task Tags">
       </command>
+      <command
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.selectCurrentWord"
+            name="Select Current Word">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -118,6 +123,10 @@
       <handler
             class="xeedit.handlers.ToggleShowTaskTags"
             commandId="Xeedit.commands.toggleShowTaskTags">
+      </handler>
+      <handler
+            class="xeedit.handlers.SelectCurrentWord"
+            commandId="Xeedit.commands.selectCurrentWord">
       </handler>
    </extension>
    <extension
@@ -193,6 +202,12 @@
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+T">
+      </key>
+      <key
+            commandId="Xeedit.commands.selectCurrentWord"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+6">
       </key>
    </extension>
    <extension
