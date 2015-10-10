@@ -1,6 +1,6 @@
 package xeedit.util;
 
-public class SourceUtil {
+public class TextUtil {
 	
 	public static int indentationOfLine(String line, int tabSize) {
 		if (line.trim().isEmpty())

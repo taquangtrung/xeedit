@@ -17,7 +17,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import xeedit.Xeedit;
-import xeedit.util.SourceUtil;
+import xeedit.util.TextUtil;
 
 public class SelectTextDownwardByIndent extends AbstractHandler {
 
@@ -110,13 +110,13 @@ public class SelectTextDownwardByIndent extends AbstractHandler {
 			}
 
 			// find next line which has different identation
-			int currentIndent = SourceUtil.indentationOfLine(currentLine, tabSize);
+			int currentIndent = TextUtil.indentationOfLine(currentLine, tabSize);
 			lineNum++;
 			while (lineNum < numOfLine - 1) {
 				beginOffset = doc.getLineOffset(lineNum);
 				endOffset = (lineNum < numOfLine - 1) ? doc.getLineOffset(lineNum+1) - 1 : docLen - 1;
 				String nextLine = doc.get(beginOffset, endOffset - beginOffset + 1);
-				int nextIndent = SourceUtil.indentationOfLine(nextLine, tabSize);
+				int nextIndent = TextUtil.indentationOfLine(nextLine, tabSize);
 				if (currentIndent != nextIndent) {
 					break;
 				}

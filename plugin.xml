@@ -73,6 +73,16 @@
             id="Xeedit.commands.selectCurrentWord"
             name="Select Current Word">
       </command>
+      <command
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.increaseFontSize"
+            name="Increase Font Size">
+      </command>
+      <command
+            categoryId="Xeedit.commands.category"
+            id="Xeedit.commands.decreaseFontSize"
+            name="Decrease Font Size">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -127,6 +137,14 @@
       <handler
             class="xeedit.handlers.SelectCurrentWord"
             commandId="Xeedit.commands.selectCurrentWord">
+      </handler>
+      <handler
+            class="xeedit.handlers.IncreaseFontSize"
+            commandId="Xeedit.commands.increaseFontSize">
+      </handler>
+      <handler
+            class="xeedit.handlers.DecreaseFontSize"
+            commandId="Xeedit.commands.decreaseFontSize">
       </handler>
    </extension>
    <extension
@@ -205,6 +223,18 @@
       </key>
       <key
             commandId="Xeedit.commands.selectCurrentWord"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+8">
+      </key>
+      <key
+            commandId="Xeedit.commands.decreaseFontSize"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+5">
+      </key>
+      <key
+            commandId="Xeedit.commands.increaseFontSize"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+6">

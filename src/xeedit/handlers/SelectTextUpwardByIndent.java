@@ -17,7 +17,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import xeedit.Xeedit;
-import xeedit.util.SourceUtil;
+import xeedit.util.TextUtil;
 
 public class SelectTextUpwardByIndent extends AbstractHandler {
 
@@ -106,7 +106,7 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 			int beginOffsetPrevLine = doc.getLineOffset(lineNum-1);
 			int endOffsetPrevLine = doc.getLineOffset(lineNum) - 1;
 			String prevLine = doc.get(beginOffsetPrevLine, endOffsetPrevLine - beginOffsetPrevLine + 1);
-			int prevIndent = SourceUtil.indentationOfLine(prevLine, tabSize);
+			int prevIndent = TextUtil.indentationOfLine(prevLine, tabSize);
 			if (prevLine.trim().isEmpty() && cursorColumn > currentIndent) {
 				newOffset = beginOffsetCurrentLine;// + currentIndent;
 				styledText.setSelection(startOffset, newOffset);
@@ -139,12 +139,12 @@ public class SelectTextUpwardByIndent extends AbstractHandler {
 
 
 			// search back to find the last line has different indentation
-			currentIndent = SourceUtil.indentationOfLine(currentLine, tabSize);
+			currentIndent = TextUtil.indentationOfLine(currentLine, tabSize);
 			while (lineNum > 0) {
 				beginOffsetPrevLine = doc.getLineOffset(lineNum-1);
 				endOffsetPrevLine = doc.getLineOffset(lineNum) - 1;
 				prevLine = doc.get(beginOffsetPrevLine, endOffsetPrevLine - beginOffsetPrevLine + 1);
-				prevIndent = SourceUtil.indentationOfLine(prevLine, tabSize);
+				prevIndent = TextUtil.indentationOfLine(prevLine, tabSize);
 
 				if (prevLine.trim().isEmpty()) {
 					break;
